@@ -1,0 +1,264 @@
+2025-09-16 19:26:43,500 transreid INFO: Saving model in the path :../logs/bison_transreid
+2025-09-16 19:26:43,500 transreid INFO: Namespace(config_file='configs/bison.yml', local_rank=0, opts=[])
+2025-09-16 19:26:43,501 transreid INFO: Loaded configuration file configs/bison.yml
+2025-09-16 19:26:43,501 transreid INFO: 
+MODEL:
+  PRETRAIN_CHOICE: 'imagenet'
+  PRETRAIN_PATH: 'pretrain/jx_vit_base_p16_224-80ecf9dd.pth'
+  METRIC_LOSS_TYPE: 'triplet'
+  IF_LABELSMOOTH: 'off'
+  IF_WITH_CENTER: 'no'
+  NAME: 'transformer'
+  NO_MARGIN: True
+  DEVICE_ID: ('0')
+  TRANSFORMER_TYPE: 'vit_base_patch16_224_TransReID'
+  STRIDE_SIZE: [16, 16]
+  SIE_CAMERA: False
+  SIE_COE: 3.0
+  JPM: True
+  RE_ARRANGE: True
+
+INPUT:
+  SIZE_TRAIN: [256, 128]
+  SIZE_TEST: [256, 128]
+  PROB: 0.5 # random horizontal flip
+  RE_PROB: 0.5 # random erasing
+  PADDING: 10
+  PIXEL_MEAN: [0.5, 0.5, 0.5]
+  PIXEL_STD: [0.5, 0.5, 0.5]
+
+DATASETS:
+  NAMES: ('bison')
+  ROOT_DIR: "J:/Masters in CS, Uni Siegen/project 15 credit/project works/bison_reid_dataset"
+
+DATALOADER:
+  SAMPLER: 'softmax_triplet'
+  NUM_INSTANCE: 2
+  NUM_WORKERS: 0
+
+SOLVER:
+  OPTIMIZER_NAME: 'SGD'
+  MAX_EPOCHS: 120
+  BASE_LR: 0.008
+  IMS_PER_BATCH: 4
+  WARMUP_METHOD: 'linear'
+  LARGE_FC_LR: False
+  CHECKPOINT_PERIOD: 120
+  LOG_PERIOD: 50
+  EVAL_PERIOD: 120
+  WEIGHT_DECAY:  1e-4
+  WEIGHT_DECAY_BIAS: 1e-4
+  BIAS_LR_FACTOR: 2
+
+TEST:
+  EVAL: True
+  IMS_PER_BATCH: 256
+  RE_RANKING: False
+  WEIGHT: '../logs/duke_vit_transreid/transformer_120.pth'
+  NECK_FEAT: 'before'
+  FEAT_NORM: 'yes'
+
+OUTPUT_DIR: "../logs/bison_transreid"
+
+
+
+2025-09-16 19:26:43,503 transreid INFO: Running with config:
+DATALOADER:
+  NUM_INSTANCE: 2
+  NUM_WORKERS: 0
+  SAMPLER: softmax_triplet
+DATASETS:
+  NAMES: bison
+  ROOT_DIR: J:/Masters in CS, Uni Siegen/project 15 credit/project works/bison_reid_dataset
+INPUT:
+  PADDING: 10
+  PIXEL_MEAN: [0.5, 0.5, 0.5]
+  PIXEL_STD: [0.5, 0.5, 0.5]
+  PROB: 0.5
+  RE_PROB: 0.5
+  SIZE_TEST: [256, 128]
+  SIZE_TRAIN: [256, 128]
+MODEL:
+  ATT_DROP_RATE: 0.0
+  COS_LAYER: False
+  DEVICE: cuda
+  DEVICE_ID: 0
+  DEVIDE_LENGTH: 4
+  DIST_TRAIN: False
+  DROP_OUT: 0.0
+  DROP_PATH: 0.1
+  ID_LOSS_TYPE: softmax
+  ID_LOSS_WEIGHT: 1.0
+  IF_LABELSMOOTH: off
+  IF_WITH_CENTER: no
+  JPM: True
+  LAST_STRIDE: 1
+  METRIC_LOSS_TYPE: triplet
+  NAME: transformer
+  NECK: bnneck
+  NO_MARGIN: True
+  PRETRAIN_CHOICE: imagenet
+  PRETRAIN_PATH: pretrain/jx_vit_base_p16_224-80ecf9dd.pth
+  RE_ARRANGE: True
+  SHIFT_NUM: 5
+  SHUFFLE_GROUP: 2
+  SIE_CAMERA: False
+  SIE_COE: 3.0
+  SIE_VIEW: False
+  STRIDE_SIZE: [16, 16]
+  TRANSFORMER_TYPE: vit_base_patch16_224_TransReID
+  TRIPLET_LOSS_WEIGHT: 1.0
+OUTPUT_DIR: ../logs/bison_transreid
+SOLVER:
+  BASE_LR: 0.008
+  BIAS_LR_FACTOR: 2
+  CENTER_LOSS_WEIGHT: 0.0005
+  CENTER_LR: 0.5
+  CHECKPOINT_PERIOD: 120
+  COSINE_MARGIN: 0.5
+  COSINE_SCALE: 30
+  EVAL_PERIOD: 120
+  GAMMA: 0.1
+  IMS_PER_BATCH: 4
+  LARGE_FC_LR: False
+  LOG_PERIOD: 50
+  MARGIN: 0.3
+  MAX_EPOCHS: 120
+  MOMENTUM: 0.9
+  OPTIMIZER_NAME: SGD
+  SEED: 1234
+  STEPS: (40, 70)
+  WARMUP_EPOCHS: 5
+  WARMUP_FACTOR: 0.01
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0.0001
+TEST:
+  DIST_MAT: dist_mat.npy
+  EVAL: True
+  FEAT_NORM: yes
+  IMS_PER_BATCH: 256
+  NECK_FEAT: before
+  RE_RANKING: False
+  WEIGHT: ../logs/duke_vit_transreid/transformer_120.pth
+2025-09-16 19:26:46,053 transreid.train INFO: start training
+2025-09-16 19:26:51,448 transreid.train INFO: Epoch 1 done. Time per batch: 0.479[s] Speed: 8.3[samples/s]
+2025-09-16 19:26:55,166 transreid.train INFO: Epoch 2 done. Time per batch: 0.338[s] Speed: 11.8[samples/s]
+2025-09-16 19:26:58,536 transreid.train INFO: Epoch 3 done. Time per batch: 0.337[s] Speed: 11.9[samples/s]
+2025-09-16 19:27:01,881 transreid.train INFO: Epoch 4 done. Time per batch: 0.334[s] Speed: 12.0[samples/s]
+2025-09-16 19:27:04,853 transreid.train INFO: Epoch 5 done. Time per batch: 0.330[s] Speed: 12.1[samples/s]
+2025-09-16 19:27:08,145 transreid.train INFO: Epoch 6 done. Time per batch: 0.329[s] Speed: 12.2[samples/s]
+2025-09-16 19:27:11,778 transreid.train INFO: Epoch 7 done. Time per batch: 0.330[s] Speed: 12.1[samples/s]
+2025-09-16 19:27:15,115 transreid.train INFO: Epoch 8 done. Time per batch: 0.334[s] Speed: 12.0[samples/s]
+2025-09-16 19:27:18,798 transreid.train INFO: Epoch 9 done. Time per batch: 0.335[s] Speed: 11.9[samples/s]
+2025-09-16 19:27:22,194 transreid.train INFO: Epoch 10 done. Time per batch: 0.340[s] Speed: 11.8[samples/s]
+2025-09-16 19:27:25,688 transreid.train INFO: Epoch 11 done. Time per batch: 0.349[s] Speed: 11.5[samples/s]
+2025-09-16 19:27:29,781 transreid.train INFO: Epoch 12 done. Time per batch: 0.372[s] Speed: 10.7[samples/s]
+2025-09-16 19:27:33,418 transreid.train INFO: Epoch 13 done. Time per batch: 0.364[s] Speed: 11.0[samples/s]
+2025-09-16 19:27:37,055 transreid.train INFO: Epoch 14 done. Time per batch: 0.364[s] Speed: 11.0[samples/s]
+2025-09-16 19:27:40,944 transreid.train INFO: Epoch 15 done. Time per batch: 0.353[s] Speed: 11.3[samples/s]
+2025-09-16 19:27:44,766 transreid.train INFO: Epoch 16 done. Time per batch: 0.347[s] Speed: 11.5[samples/s]
+2025-09-16 19:27:48,258 transreid.train INFO: Epoch 17 done. Time per batch: 0.349[s] Speed: 11.5[samples/s]
+2025-09-16 19:27:51,630 transreid.train INFO: Epoch 18 done. Time per batch: 0.337[s] Speed: 11.9[samples/s]
+2025-09-16 19:27:55,367 transreid.train INFO: Epoch 19 done. Time per batch: 0.340[s] Speed: 11.8[samples/s]
+2025-09-16 19:27:59,246 transreid.train INFO: Epoch 20 done. Time per batch: 0.353[s] Speed: 11.3[samples/s]
+2025-09-16 19:28:03,076 transreid.train INFO: Epoch 21 done. Time per batch: 0.348[s] Speed: 11.5[samples/s]
+2025-09-16 19:28:06,507 transreid.train INFO: Epoch 22 done. Time per batch: 0.343[s] Speed: 11.7[samples/s]
+2025-09-16 19:28:09,894 transreid.train INFO: Epoch 23 done. Time per batch: 0.339[s] Speed: 11.8[samples/s]
+2025-09-16 19:28:13,296 transreid.train INFO: Epoch 24 done. Time per batch: 0.340[s] Speed: 11.8[samples/s]
+2025-09-16 19:28:17,030 transreid.train INFO: Epoch 25 done. Time per batch: 0.339[s] Speed: 11.8[samples/s]
+2025-09-16 19:28:20,541 transreid.train INFO: Epoch 26 done. Time per batch: 0.351[s] Speed: 11.4[samples/s]
+2025-09-16 19:28:24,326 transreid.train INFO: Epoch 27 done. Time per batch: 0.344[s] Speed: 11.6[samples/s]
+2025-09-16 19:28:27,817 transreid.train INFO: Epoch 28 done. Time per batch: 0.349[s] Speed: 11.5[samples/s]
+2025-09-16 19:28:31,839 transreid.train INFO: Epoch 29 done. Time per batch: 0.366[s] Speed: 10.9[samples/s]
+2025-09-16 19:28:35,722 transreid.train INFO: Epoch 30 done. Time per batch: 0.353[s] Speed: 11.3[samples/s]
+2025-09-16 19:28:39,299 transreid.train INFO: Epoch 31 done. Time per batch: 0.358[s] Speed: 11.2[samples/s]
+2025-09-16 19:28:43,230 transreid.train INFO: Epoch 32 done. Time per batch: 0.357[s] Speed: 11.2[samples/s]
+2025-09-16 19:28:46,775 transreid.train INFO: Epoch 33 done. Time per batch: 0.354[s] Speed: 11.3[samples/s]
+2025-09-16 19:28:50,776 transreid.train INFO: Epoch 34 done. Time per batch: 0.364[s] Speed: 11.0[samples/s]
+2025-09-16 19:28:54,430 transreid.train INFO: Epoch 35 done. Time per batch: 0.365[s] Speed: 10.9[samples/s]
+2025-09-16 19:28:58,214 transreid.train INFO: Epoch 36 done. Time per batch: 0.344[s] Speed: 11.6[samples/s]
+2025-09-16 19:29:02,181 transreid.train INFO: Epoch 37 done. Time per batch: 0.361[s] Speed: 11.1[samples/s]
+2025-09-16 19:29:05,974 transreid.train INFO: Epoch 38 done. Time per batch: 0.345[s] Speed: 11.6[samples/s]
+2025-09-16 19:29:09,419 transreid.train INFO: Epoch 39 done. Time per batch: 0.345[s] Speed: 11.6[samples/s]
+2025-09-16 19:29:12,883 transreid.train INFO: Epoch 40 done. Time per batch: 0.346[s] Speed: 11.5[samples/s]
+2025-09-16 19:29:16,436 transreid.train INFO: Epoch 41 done. Time per batch: 0.355[s] Speed: 11.3[samples/s]
+2025-09-16 19:29:20,335 transreid.train INFO: Epoch 42 done. Time per batch: 0.354[s] Speed: 11.3[samples/s]
+2025-09-16 19:29:23,733 transreid.train INFO: Epoch 43 done. Time per batch: 0.340[s] Speed: 11.8[samples/s]
+2025-09-16 19:29:27,095 transreid.train INFO: Epoch 44 done. Time per batch: 0.336[s] Speed: 11.9[samples/s]
+2025-09-16 19:29:30,482 transreid.train INFO: Epoch 45 done. Time per batch: 0.339[s] Speed: 11.8[samples/s]
+2025-09-16 19:29:33,483 transreid.train INFO: Epoch 46 done. Time per batch: 0.333[s] Speed: 12.0[samples/s]
+2025-09-16 19:29:36,854 transreid.train INFO: Epoch 47 done. Time per batch: 0.337[s] Speed: 11.9[samples/s]
+2025-09-16 19:29:40,577 transreid.train INFO: Epoch 48 done. Time per batch: 0.338[s] Speed: 11.8[samples/s]
+2025-09-16 19:29:43,945 transreid.train INFO: Epoch 49 done. Time per batch: 0.337[s] Speed: 11.9[samples/s]
+2025-09-16 19:29:46,979 transreid.train INFO: Epoch 50 done. Time per batch: 0.337[s] Speed: 11.9[samples/s]
+2025-09-16 19:29:50,689 transreid.train INFO: Epoch 51 done. Time per batch: 0.337[s] Speed: 11.9[samples/s]
+2025-09-16 19:29:54,397 transreid.train INFO: Epoch 52 done. Time per batch: 0.337[s] Speed: 11.9[samples/s]
+2025-09-16 19:29:57,836 transreid.train INFO: Epoch 53 done. Time per batch: 0.344[s] Speed: 11.6[samples/s]
+2025-09-16 19:30:00,978 transreid.train INFO: Epoch 54 done. Time per batch: 0.349[s] Speed: 11.5[samples/s]
+2025-09-16 19:30:04,490 transreid.train INFO: Epoch 55 done. Time per batch: 0.351[s] Speed: 11.4[samples/s]
+2025-09-16 19:30:07,837 transreid.train INFO: Epoch 56 done. Time per batch: 0.335[s] Speed: 12.0[samples/s]
+2025-09-16 19:30:11,309 transreid.train INFO: Epoch 57 done. Time per batch: 0.347[s] Speed: 11.5[samples/s]
+2025-09-16 19:30:15,027 transreid.train INFO: Epoch 58 done. Time per batch: 0.338[s] Speed: 11.8[samples/s]
+2025-09-16 19:30:18,746 transreid.train INFO: Epoch 59 done. Time per batch: 0.338[s] Speed: 11.8[samples/s]
+2025-09-16 19:30:22,339 transreid.train INFO: Epoch 60 done. Time per batch: 0.327[s] Speed: 12.2[samples/s]
+2025-09-16 19:30:25,705 transreid.train INFO: Epoch 61 done. Time per batch: 0.337[s] Speed: 11.9[samples/s]
+2025-09-16 19:30:29,515 transreid.train INFO: Epoch 62 done. Time per batch: 0.346[s] Speed: 11.5[samples/s]
+2025-09-16 19:30:32,942 transreid.train INFO: Epoch 63 done. Time per batch: 0.343[s] Speed: 11.7[samples/s]
+2025-09-16 19:30:36,672 transreid.train INFO: Epoch 64 done. Time per batch: 0.339[s] Speed: 11.8[samples/s]
+2025-09-16 19:30:40,405 transreid.train INFO: Epoch 65 done. Time per batch: 0.339[s] Speed: 11.8[samples/s]
+2025-09-16 19:30:44,041 transreid.train INFO: Epoch 66 done. Time per batch: 0.330[s] Speed: 12.1[samples/s]
+2025-09-16 19:30:47,703 transreid.train INFO: Epoch 67 done. Time per batch: 0.333[s] Speed: 12.0[samples/s]
+2025-09-16 19:30:51,007 transreid.train INFO: Epoch 68 done. Time per batch: 0.330[s] Speed: 12.1[samples/s]
+2025-09-16 19:30:54,652 transreid.train INFO: Epoch 69 done. Time per batch: 0.331[s] Speed: 12.1[samples/s]
+2025-09-16 19:30:58,012 transreid.train INFO: Epoch 70 done. Time per batch: 0.336[s] Speed: 11.9[samples/s]
+2025-09-16 19:31:01,678 transreid.train INFO: Epoch 71 done. Time per batch: 0.333[s] Speed: 12.0[samples/s]
+2025-09-16 19:31:05,048 transreid.train INFO: Epoch 72 done. Time per batch: 0.337[s] Speed: 11.9[samples/s]
+2025-09-16 19:31:08,708 transreid.train INFO: Epoch 73 done. Time per batch: 0.333[s] Speed: 12.0[samples/s]
+2025-09-16 19:31:12,410 transreid.train INFO: Epoch 74 done. Time per batch: 0.337[s] Speed: 11.9[samples/s]
+2025-09-16 19:31:15,870 transreid.train INFO: Epoch 75 done. Time per batch: 0.346[s] Speed: 11.6[samples/s]
+2025-09-16 19:31:19,609 transreid.train INFO: Epoch 76 done. Time per batch: 0.340[s] Speed: 11.8[samples/s]
+2025-09-16 19:31:23,473 transreid.train INFO: Epoch 77 done. Time per batch: 0.351[s] Speed: 11.4[samples/s]
+2025-09-16 19:31:26,810 transreid.train INFO: Epoch 78 done. Time per batch: 0.334[s] Speed: 12.0[samples/s]
+2025-09-16 19:31:29,812 transreid.train INFO: Epoch 79 done. Time per batch: 0.334[s] Speed: 12.0[samples/s]
+2025-09-16 19:31:33,251 transreid.train INFO: Epoch 80 done. Time per batch: 0.344[s] Speed: 11.6[samples/s]
+2025-09-16 19:31:36,595 transreid.train INFO: Epoch 81 done. Time per batch: 0.334[s] Speed: 12.0[samples/s]
+2025-09-16 19:31:40,318 transreid.train INFO: Epoch 82 done. Time per batch: 0.338[s] Speed: 11.8[samples/s]
+2025-09-16 19:31:43,768 transreid.train INFO: Epoch 83 done. Time per batch: 0.345[s] Speed: 11.6[samples/s]
+2025-09-16 19:31:47,204 transreid.train INFO: Epoch 84 done. Time per batch: 0.344[s] Speed: 11.6[samples/s]
+2025-09-16 19:31:50,870 transreid.train INFO: Epoch 85 done. Time per batch: 0.333[s] Speed: 12.0[samples/s]
+2025-09-16 19:31:54,563 transreid.train INFO: Epoch 86 done. Time per batch: 0.336[s] Speed: 11.9[samples/s]
+2025-09-16 19:31:58,254 transreid.train INFO: Epoch 87 done. Time per batch: 0.335[s] Speed: 11.9[samples/s]
+2025-09-16 19:32:01,273 transreid.train INFO: Epoch 88 done. Time per batch: 0.335[s] Speed: 11.9[samples/s]
+2025-09-16 19:32:04,635 transreid.train INFO: Epoch 89 done. Time per batch: 0.336[s] Speed: 11.9[samples/s]
+2025-09-16 19:32:08,323 transreid.train INFO: Epoch 90 done. Time per batch: 0.335[s] Speed: 11.9[samples/s]
+2025-09-16 19:32:11,643 transreid.train INFO: Epoch 91 done. Time per batch: 0.332[s] Speed: 12.1[samples/s]
+2025-09-16 19:32:15,375 transreid.train INFO: Epoch 92 done. Time per batch: 0.339[s] Speed: 11.8[samples/s]
+2025-09-16 19:32:19,214 transreid.train INFO: Epoch 93 done. Time per batch: 0.349[s] Speed: 11.5[samples/s]
+2025-09-16 19:32:23,062 transreid.train INFO: Epoch 94 done. Time per batch: 0.350[s] Speed: 11.4[samples/s]
+2025-09-16 19:32:26,422 transreid.train INFO: Epoch 95 done. Time per batch: 0.336[s] Speed: 11.9[samples/s]
+2025-09-16 19:32:29,810 transreid.train INFO: Epoch 96 done. Time per batch: 0.339[s] Speed: 11.8[samples/s]
+2025-09-16 19:32:33,459 transreid.train INFO: Epoch 97 done. Time per batch: 0.332[s] Speed: 12.1[samples/s]
+2025-09-16 19:32:37,156 transreid.train INFO: Epoch 98 done. Time per batch: 0.336[s] Speed: 11.9[samples/s]
+2025-09-16 19:32:40,892 transreid.train INFO: Epoch 99 done. Time per batch: 0.340[s] Speed: 11.8[samples/s]
+2025-09-16 19:32:44,244 transreid.train INFO: Epoch 100 done. Time per batch: 0.335[s] Speed: 11.9[samples/s]
+2025-09-16 19:32:47,928 transreid.train INFO: Epoch 101 done. Time per batch: 0.335[s] Speed: 11.9[samples/s]
+2025-09-16 19:32:51,590 transreid.train INFO: Epoch 102 done. Time per batch: 0.333[s] Speed: 12.0[samples/s]
+2025-09-16 19:32:55,390 transreid.train INFO: Epoch 103 done. Time per batch: 0.345[s] Speed: 11.6[samples/s]
+2025-09-16 19:32:58,906 transreid.train INFO: Epoch 104 done. Time per batch: 0.352[s] Speed: 11.4[samples/s]
+2025-09-16 19:33:02,748 transreid.train INFO: Epoch 105 done. Time per batch: 0.349[s] Speed: 11.5[samples/s]
+2025-09-16 19:33:06,238 transreid.train INFO: Epoch 106 done. Time per batch: 0.349[s] Speed: 11.5[samples/s]
+2025-09-16 19:33:10,103 transreid.train INFO: Epoch 107 done. Time per batch: 0.351[s] Speed: 11.4[samples/s]
+2025-09-16 19:33:14,102 transreid.train INFO: Epoch 108 done. Time per batch: 0.363[s] Speed: 11.0[samples/s]
+2025-09-16 19:33:17,714 transreid.train INFO: Epoch 109 done. Time per batch: 0.361[s] Speed: 11.1[samples/s]
+2025-09-16 19:33:21,219 transreid.train INFO: Epoch 110 done. Time per batch: 0.351[s] Speed: 11.4[samples/s]
+2025-09-16 19:33:24,662 transreid.train INFO: Epoch 111 done. Time per batch: 0.344[s] Speed: 11.6[samples/s]
+2025-09-16 19:33:28,169 transreid.train INFO: Epoch 112 done. Time per batch: 0.351[s] Speed: 11.4[samples/s]
+2025-09-16 19:33:32,003 transreid.train INFO: Epoch 113 done. Time per batch: 0.349[s] Speed: 11.5[samples/s]
+2025-09-16 19:33:35,926 transreid.train INFO: Epoch 114 done. Time per batch: 0.357[s] Speed: 11.2[samples/s]
+2025-09-16 19:33:39,800 transreid.train INFO: Epoch 115 done. Time per batch: 0.352[s] Speed: 11.4[samples/s]
+2025-09-16 19:33:43,813 transreid.train INFO: Epoch 116 done. Time per batch: 0.365[s] Speed: 11.0[samples/s]
+2025-09-16 19:33:47,421 transreid.train INFO: Epoch 117 done. Time per batch: 0.361[s] Speed: 11.1[samples/s]
+2025-09-16 19:33:50,933 transreid.train INFO: Epoch 118 done. Time per batch: 0.351[s] Speed: 11.4[samples/s]
+2025-09-16 19:33:54,130 transreid.train INFO: Epoch 119 done. Time per batch: 0.355[s] Speed: 11.3[samples/s]
+2025-09-16 19:33:57,944 transreid.train INFO: Epoch 120 done. Time per batch: 0.347[s] Speed: 11.5[samples/s]
